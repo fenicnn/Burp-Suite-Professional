@@ -81,8 +81,10 @@ mkdir -p "$BIN_DIR"
 echo "🔍 Fetching latest Burp Suite versions..."
 
 VERSIONS=()
+# Only fetch Professional / Community versions (not DAST, CI/CD Driver, etc.)
 RAW=$(curl -sL "https://portswigger.net/burp/releases" 2>/dev/null \
-    | grep -oE '[0-9]{4}\.[0-9]+\.[0-9]+' \
+    | grep -oE 'professional-community-[0-9]{4}-[0-9]+(-[0-9]+)?' \
+    | sed 's/professional-community-//; s/-/./g' \
     | sort -t. -k1,1nr -k2,2nr -k3,3nr \
     | awk '!seen[$0]++' \
     | head -5)
@@ -91,10 +93,10 @@ if [[ -n "$RAW" ]]; then
     while IFS= read -r v; do
         VERSIONS+=("$v")
     done <<< "$RAW"
-    echo "✅ Fetched ${#VERSIONS[@]} versions from portswigger.net"
+    echo "✅ Fetched ${#VERSIONS[@]} Professional/Community versions from portswigger.net"
 else
     echo "⚠️  Could not fetch versions online — using fallback list."
-    VERSIONS=("2025.5.6" "2025.5.5" "2025.4.2" "2025.3.1" "2024.12.2")
+    VERSIONS=("2026.4.3" "2026.4.2" "2026.4.1" "2026.4" "2026.3.3")
 fi
 
 echo ""
@@ -129,7 +131,7 @@ if [[ "$LOCAL_JAR_MODE" == false ]]; then
     echo "✅ Selected Burp Suite version: $VERSION"
 fi
 
-LINK="https://portswigger.net/burp/releases/startdownload?product=pro&version=$VERSION&type=jar"
+LINK="https://portswigger.net/burp/releases/startdownload?product=desktop&version=$VERSION&type=Jar"
 JAR_FILE="Burp_Suite_Pro_${VERSION}.jar"
 
 if [[ "$LOCAL_JAR_MODE" == true ]]; then
