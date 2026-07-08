@@ -3,26 +3,27 @@
 <!-- Title Block -->
 <img src="https://img.shields.io/badge/%E2%9A%A1-BURP%20SUITE%20PRO-FF6633?style=for-the-badge&labelColor=1a1a2e" height="40"/>
 
-# Burp Suite Professional — macOS
+# Burp Suite Professional — Multi-Platform Installer
 
-**One-command installer & launcher for Burp Suite Professional on macOS**
+**One-command installer & launcher for Burp Suite Professional on macOS and Linux**
 <br/>
-*Supports Apple Silicon (M1/M2/M3/M4) and Intel Macs*
+*Supports Apple Silicon (M1/M2/M3/M4), Intel Macs, and Linux (Kali, Ubuntu, Debian)*
 
 <br/>
 
 [![macOS](https://img.shields.io/badge/macOS-Sonoma%20|%20Ventura%20|%20Monterey-000000?style=for-the-badge&logo=apple&logoColor=white)](https://www.apple.com/macos/)
+[![Linux](https://img.shields.io/badge/Linux-Kali%20|%20Ubuntu%20|%20Debian-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://www.kali.org/)
 [![Java](https://img.shields.io/badge/Java-21+-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://adoptium.net/)
 [![Bash](https://img.shields.io/badge/Shell-Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
 [![License](https://img.shields.io/badge/License-Educational-blue?style=for-the-badge)](LICENSE)
 
 <br/>
 
-<img src="https://img.shields.io/github/stars/ReXiOP/Burp-Suite-Professional-macOS?style=social" />
+<img src="https://img.shields.io/github/stars/fenicnn/Burp-Suite-Professional?style=social" />
 &nbsp;
-<img src="https://img.shields.io/github/forks/ReXiOP/Burp-Suite-Professional-macOS?style=social" />
+<img src="https://img.shields.io/github/forks/fenicnn/Burp-Suite-Professional?style=social" />
 &nbsp;
-<img src="https://img.shields.io/github/watchers/ReXiOP/Burp-Suite-Professional-macOS?style=social" />
+<img src="https://img.shields.io/github/watchers/fenicnn/Burp-Suite-Professional?style=social" />
 
 </div>
 
@@ -45,9 +46,8 @@ No manual JAR wrangling or classpath headaches.
 </td>
 <td width="50%">
 
-### 🍎 Native macOS Support
-Auto-detects **Apple Silicon** vs **Intel** architecture
-and installs the launcher to the correct `bin` directory.
+### 💻 Cross-Platform Support
+Native support for **macOS** (Apple Silicon & Intel) and **Linux** (Kali, Ubuntu, Debian).
 
 </td>
 </tr>
@@ -77,7 +77,7 @@ Switch versions anytime by re-running the installer.
 >
 > **Workaround:**
 > 1. Download the Burp Suite Professional **JAR** file manually from [portswigger.net/burp/releases](https://portswigger.net/burp/releases).
-> 2. Run this script (`sudo ./run.sh`) and select **Option 7**.
+> 2. Run the installer script and select **Option 7**.
 > 3. Provide the path to the downloaded JAR file when prompted.
 
 <br/>
@@ -91,9 +91,10 @@ Switch versions anytime by re-running the installer.
 | Requirement | Minimum | Recommended |
 |---|---|---|
 | **macOS** | Monterey 12.0 | Sonoma 15+ |
-| **Java JDK** | **21** | 21+ (Temurin / Oracle) |
+| **Linux** | Any modern distro | Kali 2024+ / Ubuntu 22.04+ |
+| **Java JDK** | **21** | 21+ (Temurin / Oracle / OpenJDK) |
 | **Disk Space** | ~500 MB | 1 GB |
-| **Architecture** | Intel x86_64 | Apple Silicon arm64 |
+| **Architecture** | Intel x86_64 / Apple Silicon arm64 | Apple Silicon arm64 / Linux aarch64 |
 
 <br/>
 
@@ -103,7 +104,9 @@ Switch versions anytime by re-running the installer.
 
 ## 🛠️ Installation
 
-### Step 1 — Install Java
+### 📱 Option 1 — macOS
+
+#### Step 1 — Install Java
 
 <details>
 <summary><b>Option A: Homebrew (Recommended)</b></summary>
@@ -131,53 +134,70 @@ java -version
 
 </details>
 
-<br/>
-
-### Step 2 — Clone & Run
+#### Step 2 — Clone & Run
 
 ```bash
-git clone https://github.com/ReXiOP/Burp-Suite-Professional-macOS.git
-cd Burp-Suite-Professional-macOS
+git clone https://github.com/fenicnn/Burp-Suite-Professional.git
+cd Burp-Suite-Professional
 chmod +x run.sh
 sudo ./run.sh
 ```
 
-You'll see an interactive menu:
+---
 
-```
-┌─────────────┐
-│┏━┓┏━┓ ┏┓╻╺┳┓│
-│┗━┓┣━┫  ┃┃ ┃┃│
-│┗━┛╹ ╹┗━┛╹╺┻┛│
-└─────────────┘
+### 🐧 Option 2 — Linux (Kali / Ubuntu / Debian)
 
-Available Burp Suite Pro Versions:
-1) 2025.5.6  (latest)
-2) 2025.5.5
-3) 2025.4.2
-4) 2025.3.1
-5) 2024.12.2
-6) Custom version (download manually)
-7) Use local JAR file (enter path manually)
+#### Step 1 — Download Burp Suite JAR
 
-Select option [1-7]:
+Download the latest Burp Suite Professional JAR file from:
+👉 [https://portswigger.net/burp/releases](https://portswigger.net/burp/releases)
+
+#### Step 2 — Install Java 21
+
+```bash
+sudo apt update && sudo apt install openjdk-21-jdk -y
+
+# Verify
+java -version
 ```
 
-The script will:
-1. ⬇️  Download the selected JAR from PortSwigger CDN
-2. 🔑  Launch the keygenerator
-3. 🚀  Create and install a global `burp` launcher
-4. ▶️  Start Burp Suite Professional
+#### Step 3 — Clone & Run
 
-<br/>
+```bash
+git clone https://github.com/fenicnn/Burp-Suite-Professional.git
+cd Burp-Suite-Professional
+chmod +x run_linux.sh
+sudo ./run_linux.sh
+```
 
-### Step 3 — Launch Anytime
+#### Step 4 — Select Option 7
+
+When prompted, select **Option 7** to use the local JAR file you downloaded.
+
+#### Step 5 — License Activation
+
+1. From the keygen panel, copy the **License** key to Burp Suite's registration page
+2. Select **Manual register** option
+3. Copy the **Request** field from Burp Suite
+4. Paste the Request into the keygen to get the **Response**
+5. Copy the Response back to Burp Suite and complete registration
+
+#### Step 6 — Configure Browser Proxy
+
+Set your browser proxy to: `127.0.0.1:8080`
+
+---
+
+### 🚀 Launch Anytime
 
 ```bash
 burp
 ```
 
-> The launcher is installed to `/opt/homebrew/bin/burp` (Apple Silicon) or `/usr/local/bin/burp` (Intel).
+> The launcher is installed to:
+> - **macOS Apple Silicon**: `/opt/homebrew/bin/burp`
+> - **macOS Intel**: `/usr/local/bin/burp`
+> - **Linux**: `/usr/local/bin/burp`
 
 <br/>
 
@@ -188,9 +208,11 @@ burp
 ## 📂 Project Structure
 
 ```
-Burp-Suite-Professional-macOS/
+Burp-Suite-Professional/
 │
-├── run.sh                      # Main installer & setup script
+├── run.sh                      # macOS installer & setup script
+├── run_linux.sh                # Linux installer & setup script
+├── run.ps1                     # Windows installer & setup script
 ├── loader.jar                  # Java agent loader
 ├── keygen.jar                  # License key generator
 ├── README.md                   # This file
@@ -215,8 +237,14 @@ Burp-Suite-Professional-macOS/
 
 Simply re-run the installer and pick a different version:
 
+**macOS:**
 ```bash
 sudo ./run.sh
+```
+
+**Linux:**
+```bash
+sudo ./run_linux.sh
 ```
 
 The script automatically:
@@ -237,8 +265,14 @@ The script automatically:
 <details>
 <summary><b>❌ "Java is not installed"</b></summary>
 
+**macOS:**
 ```bash
 brew install --cask temurin
+```
+
+**Linux:**
+```bash
+sudo apt update && sudo apt install openjdk-21-jdk -y
 ```
 
 Or download from [adoptium.net](https://adoptium.net/).
@@ -250,12 +284,14 @@ Or download from [adoptium.net](https://adoptium.net/).
 
 This means Burp Suite was compiled for **Java 21** but you're running an older version.
 
+**macOS:**
 ```bash
-# Check your current version
-java -version
-
-# Upgrade to Java 21+
 brew install --cask temurin
+```
+
+**Linux:**
+```bash
+sudo apt update && sudo apt install openjdk-21-jdk -y
 ```
 
 After upgrading, verify:
@@ -271,9 +307,16 @@ java -version
 
 Make sure the script is executable and you're running with `sudo`:
 
+**macOS:**
 ```bash
 chmod +x run.sh
 sudo ./run.sh
+```
+
+**Linux:**
+```bash
+chmod +x run_linux.sh
+sudo ./run_linux.sh
 ```
 
 </details>
@@ -297,14 +340,29 @@ brew install --cask temurin
 </details>
 
 <details>
+<summary><b>❌ Burp fails to start on Linux (GUI error)</b></summary>
+
+Burp Suite requires a graphical environment. If you're connected via SSH:
+
+```bash
+# Enable X11 forwarding in your SSH connection
+ssh -X user@linux-ip
+
+# Or set the DISPLAY environment variable
+export DISPLAY=:0.0
+```
+
+</details>
+
+<details>
 <summary><b>❌ "burp: command not found"</b></summary>
 
 The launcher wasn't added to your PATH. Run:
 
 ```bash
-# Add the current working directory to your PATH
-echo 'export PATH="'$(pwd)':$PATH"' >> ~/.zshrc
-source ~/.zshrc
+# Add the installation directory to your PATH
+echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 </details>
@@ -318,7 +376,8 @@ source ~/.zshrc
 ## ⚙️ How It Works
 
 ```
-sudo ./run.sh
+sudo ./run.sh (macOS)
+sudo ./run_linux.sh (Linux)
        │
        ▼
 ┌──────────────┐     ┌─────────────────┐     ┌──────────────┐
@@ -333,8 +392,6 @@ sudo ./run.sh
                      │  or /usr/local  │     │  Script      │
                      └─────────────────┘     └──────────────┘
 ```
-
-
 
 <br/>
 
@@ -360,14 +417,11 @@ sudo ./run.sh
 
 ## 👨‍💻 Author
 
-**Muhammad Sajid** — [@ReXiOP](https://github.com/ReXiOP)
-
-💻 Full-Stack Developer &nbsp;·&nbsp; 🔒 Security Enthusiast &nbsp;·&nbsp; ⚡ Automation Lover
+**fenicnn** — [@fenicnn](https://github.com/fenicnn)
 
 <br/>
 
-[![Email](https://img.shields.io/badge/Email-dev.sajid09@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dev.sajid09@gmail.com)
-[![GitHub](https://img.shields.io/badge/GitHub-ReXiOP-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ReXiOP)
+[![GitHub](https://img.shields.io/badge/GitHub-fenicnn-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/fenicnn)
 
 <br/>
 
@@ -379,6 +433,6 @@ sudo ./run.sh
 
 <br/>
 
-<img src="https://img.shields.io/github/stars/ReXiOP/Burp-Suite-Professional-macOS" />
+<img src="https://img.shields.io/github/stars/fenicnn/Burp-Suite-Professional" />
 
 </div>
